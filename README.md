@@ -10,4 +10,4 @@ Hangman | Java										                July 2024
 •	Developed a console-based Hangman game that supports both single-player and two-player modes, utilizing file I/O for word management, handling user input, performing data analysis and leveraging data structures for efficient gameplay. 
 Tic-Tac-Toe | Java									                July 2024
 •	Developed a console-based Tic-Tac-Toe game, utilizing data structures such as ArrayList to track positions & implement game logic, handled user input, & employed randomness for AI moves. 
-![image](https://github.com/user-attachments/assets/be959efe-019b-4d86-8305-a11a28687074)
+
