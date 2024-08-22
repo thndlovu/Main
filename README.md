@@ -5,6 +5,7 @@
   
 **Weather App** | Python | August 2024 - Present
 - Developed a GUI- based Weather App, using Open Weather Map API to acquire data in order to find weather reports of temperature, humidity, pressure, wind speed, description and current time of any place in the world.
+![WeatherApp](Screenshots/WeatherApp.png)
   
 **Snake Game** | Java | August 2024
 - Developed a GUI-based Snake game, leveraging data structures like ArrayList to manage the snake’s body, implemented game logic for movement & collision detection, handled user input for directional control, and incorporated randomness for food placement.
