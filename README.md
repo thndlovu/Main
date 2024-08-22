@@ -3,7 +3,7 @@
 **Developer Portfolio** | HTML, CSS, JavaScript | August 2024 - Present
 - Developed a fully responsive portfolio website utilizing Git, version control and Netlify, effectively showcasing my skills, experience, and projects.
   
-**Weather App** | Python | August 2024 - Present
+**Weather App** | Python | August 2024
 - Developed a GUI- based Weather App, using Open Weather Map API to acquire data in order to find weather reports of temperature, humidity, pressure, wind speed, description and current time of any place in the world.
 <img width="911" alt="WeatherApp" src="https://github.com/user-attachments/assets/83ba1a5d-e87f-4a23-990a-193b8906368c">
  
