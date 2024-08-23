@@ -16,7 +16,7 @@
 **Tic-Tac-Toe** | Java | July 2024
 - •	Developed a console-based Tic-Tac-Toe game, utilizing data structures to track positions & implement game logic, handled user input, & employed randomness for AI moves.
 
-<img width="367" alt="Screenshot 2024-08-23 at 15 11 33" src="https://github.com/user-attachments/assets/730d2af6-34d0-49b6-b930-b568b23f3223"> <img width="341" alt="Screenshot 2024-08-23 at 15 16 35" src="https://github.com/user-attachments/assets/064b3bba-157b-4da4-aeb1-51c498bd42f4">
+ <img width="341" alt="Screenshot 2024-08-23 at 15 16 35" src="https://github.com/user-attachments/assets/064b3bba-157b-4da4-aeb1-51c498bd42f4"> <img width="367" alt="Screenshot 2024-08-23 at 15 11 33" src="https://github.com/user-attachments/assets/730d2af6-34d0-49b6-b930-b568b23f3223">
 
 
 
