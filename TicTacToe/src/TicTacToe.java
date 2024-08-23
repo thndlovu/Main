@@ -69,11 +69,11 @@ public class TicTacToe {
 	}
 	
 	public static void updateScores(String result) {
-		if(result.contains("won!")) {
+		if(result.contains("Congratulations you won!")) {
 			playerScore++;
-		} else if(result.contains("Lost")) {
+		} else if(result.contains("The Computer won! Sorry you Lost.")) {
 			computerScore++;
-		} else if(result.contains("Tie!")) {
+		} else if(result.contains("Tie! Try again.")) {
 			tieScore++;
 		}
 	}
@@ -157,7 +157,7 @@ public class TicTacToe {
 			if(playerPositions.containsAll(l)) {
 				return "Congratulations you won!";
 			} else if (computerPositions.containsAll(l)) {
-				return "The Computer won! Sorry you Lost";
+				return "The Computer won! Sorry you Lost.";
 			} else if(playerPositions.size() + computerPositions.size() == 9) {
 				return "Tie! Try again.";
 			}
