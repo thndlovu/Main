@@ -3,6 +3,10 @@ public class TicTacToe {
 	
 	static ArrayList <Integer> playerPositions = new ArrayList<Integer>();
 	static ArrayList <Integer> computerPositions = new ArrayList<Integer>();
+	
+	static int playerScore = 0;
+	static int computerScore = 0;
+	static int tieScore = 0;
 
 	public static void main(String[] args) {
 		char [][] gameBoard = {	{' ', '|', ' ', '|', ' '},
@@ -14,7 +18,6 @@ public class TicTacToe {
 		
 		while(true) {
 			Scanner sc = new Scanner(System.in);
-			
 			System.out.println("Enter your placement (1-9): ");
 			int playerPos = sc.nextInt();
 			while(playerPositions.contains(playerPos) || computerPositions.contains(playerPos)) {
@@ -26,6 +29,7 @@ public class TicTacToe {
 			String result = checkWinner();
 			if(result.length() > 0){
 				System.out.println(result);
+				updateScores(result);
 				createBoard(gameBoard);
 				break;
 		}
@@ -42,11 +46,37 @@ public class TicTacToe {
 			result = checkWinner();
 			if(result.length() > 0){
 				System.out.println(result);
+				updateScores(result);
 				createBoard(gameBoard);
 				break;
 		}
 	}	
+		System.out.println("Player Score: " + playerScore + "\nComputer Score: " + computerScore + "\nTie Score: " + tieScore);
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Do you want to play again? (yes/no): ");
+		String replay = sc.next();
+		if(replay.equalsIgnoreCase("yes")) {
+			resetGame();
+			main(null);
+		} else {
+			System.out.println("Thanks for playing my game. Have a great day!");
+		}
 }
+	
+	public static void resetGame() {
+		playerPositions.clear();
+		computerPositions.clear();
+	}
+	
+	public static void updateScores(String result) {
+		if(result.contains("won!")) {
+			playerScore++;
+		} else if(result.contains("Lost")) {
+			computerScore++;
+		} else if(result.contains("Tie!")) {
+			tieScore++;
+		}
+	}
 		
 	public static void createBoard(char [][] gameBoard) {
 		for(char [] row: gameBoard) {
