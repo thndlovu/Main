@@ -14,6 +14,22 @@ public class Hangman {
 		String players = keyboard.nextLine();
 		String word;
 		
+		System.out.println("Choose difficulty level (easy/hard): ");
+		String difficulty = keyboard.nextLine();
+		int maxWrongGuesses; //for letter guessed not word guessed
+		switch(difficulty.toLowerCase()) {
+		case "easy":
+			maxWrongGuesses = 6;
+			break;
+		case "hard":
+			maxWrongGuesses = 4;
+			break;
+		default:
+			maxWrongGuesses = 6;
+			System.out.println("Invalid difficulty level. Defaulting to easy.");
+		}
+		
+		
 		if(players.equals("1")) {
 			Scanner scanner = new Scanner(new File("/Users/blacboy26/Desktop/hangman.words.txt"));
 			
@@ -32,17 +48,23 @@ public class Hangman {
 		}
 		//System.out.println(word);		
 		List<Character> playerGuesses = new ArrayList<>(); //List of characters
-		
 		int wrongCount = 0;
+		boolean hintGiven = false;
+		
 		while(true) { 
-			printHangedMan(wrongCount);
-			if(wrongCount >= 6) {
+			printHangedMan(wrongCount, maxWrongGuesses);
+			if(wrongCount == maxWrongGuesses) {
 				System.out.println("You lose!");
 				System.out.println("The word was: " + word);
 				break;
 			}
 			
 			printWordState(word, playerGuesses);
+			
+			if(wrongCount == 3 && !hintGiven) { //if player guesses a letter incorectly 3 times, provide a hint
+				provideHint(word, playerGuesses);
+				hintGiven = true;
+			}
 			if(!getPlayerGuess(keyboard, word, playerGuesses)) { //if letterGuess is not contained in word increment wrongCount
 				wrongCount++;
 			}
@@ -60,6 +82,15 @@ public class Hangman {
 		}
 	} 
 }
+	
+	private static void provideHint(String word, List<Character> playerGuesses) {
+		for(char c: word.toCharArray()) {
+			if(!playerGuesses.contains(c)) {
+				System.out.println("Hint: One of the letters in the word is '" + c + "'");
+				return;
+			}
+		}
+	}
 		
 	private static boolean printWordState(String word, List<Character> playerGuesses) {
 		int correctCount = 0;
@@ -83,7 +114,7 @@ public class Hangman {
 		return word.contains(letterGuess);
 	}
 	
-	private static void printHangedMan(Integer wrongCount) {
+	private static void printHangedMan(Integer wrongCount, int maxWrongGuesses) {
 		System.out.println(" -------");
 		System.out.println(" |     |");
 		if(wrongCount >= 1) {
@@ -109,6 +140,10 @@ public class Hangman {
 			} else {
 				System.out.println(""); //if wrongCount = 2
 			}
+		}
+		
+		if(wrongCount == maxWrongGuesses) {
+			System.out.println("");
 		}
 	}
 }
