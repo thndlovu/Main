@@ -12,6 +12,7 @@
 
 **Hangman** | Java | July 2024
 - Developed a console-based Hangman game that supports both single-player and two-player modes, utilizing file I/O for word management, handling user input, performing data analysis and leveraging data structures for efficient gameplay.
+  
 <img width="480" alt="Screenshot 2024-08-23 at 18 04 35" src="https://github.com/user-attachments/assets/d2e44bd0-c36f-4e61-8a42-ea97a72e96e7"> <img width="395" alt="Screenshot 2024-08-23 at 18 04 47" src="https://github.com/user-attachments/assets/6938707b-77da-4892-9e5c-3fd089d68931">
 
 **Tic-Tac-Toe** | Java | July 2024
