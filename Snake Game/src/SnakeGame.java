@@ -27,9 +27,10 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener { /
     Random random;
 
     //game logic
-    Timer gameLoop;
     int velocityX;
     int velocityY;
+    Timer gameLoop;
+
     boolean gameOver = false; //default
 
     SnakeGame(int boardWidth, int boardHeight){
@@ -47,10 +48,11 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener { /
         random = new Random();
         placeFood();
 
-        velocityX = 0;
+        velocityX = 1;
         velocityY = 0;
 
-        gameLoop = new Timer(100, this);
+        //game timer
+        gameLoop = new Timer(100, this); //time taken to start timer
         gameLoop.start();
     }
 
@@ -60,14 +62,12 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener { /
     }
 
     public void draw(Graphics g) {
-        //Grid
-        // for(int i = 0; i < boardWidth/tileSize; i++){ //24 rows, 24 columns of squares
-        //     //(x1, y1, x2, y2)
-        //     g.setColor(Color.gray);
-        //     g.drawLine(i * tileSize, 0, i * tileSize, boardHeight); //vertical lines (y is from 0 - boardHeight)
-        //     g.drawLine(0, i * tileSize, boardWidth, i * tileSize); //horizontal lines (x is from 0 - boardWidth)
-        // }
-
+        //Grid Lines
+        for(int i = 0; i < boardWidth/tileSize; i++){ //24 rows, 24 columns of squares
+            //(x1, y1, x2, y2)
+            g.drawLine(i * tileSize, 0, i * tileSize, boardHeight); //vertical lines (y is from 0 - boardHeight)
+            g.drawLine(0, i * tileSize, boardWidth, i * tileSize); //horizontal lines (x is from 0 - boardWidth)
+        }
 
         //food
         g.setColor(Color.red);
@@ -75,7 +75,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener { /
         g.fill3DRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize, true); 
 
         //Snake Head
-        g.setColor(Color.green); //color of snake
+        g.setColor(Color.blue); //color of snake
        // g.fillRect(snakeHead.x * tileSize, snakeHead.y * tileSize, tileSize, tileSize); //draw rectangle (x,y, w, h)
         g.fill3DRect(snakeHead.x * tileSize, snakeHead.y * tileSize, tileSize, tileSize, true);
 
@@ -93,21 +93,29 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener { /
             //display Game Over and score of how many times you've eaten the food (value, x position, y position) of where to display
             g.drawString("Game Over: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize); 
         } else {
+            g.setColor(Color.green);
             g.drawString("Score: " + String.valueOf(snakeBody.size()), tileSize - 16, tileSize);
         }
     }
 
     public void placeFood() { //function to place food randomly on board
-        food.x = random.nextInt(boardWidth/tileSize); // x position is random number from 0 - 24
-        food.y = random.nextInt(boardHeight/tileSize); // y position is random number from 0 - 24
-    }
+        boolean isValidPosition = false;
+        while(!isValidPosition){
+            food.x = random.nextInt(boardWidth/tileSize); // x position is random number from 0 - 24
+            food.y = random.nextInt(boardHeight/tileSize); // y position is random number from 0 - 24
+            isValidPosition = true;
 
-    public boolean collision(Tile tile1, Tile tile2){
-        return tile1.x == tile2.x && tile1.y == tile2.y;
+            for(Tile snakePart: snakeBody){
+                if(collision(food, snakePart)){
+                    isValidPosition = false;
+                    break;
+            }
+        }
     }
+ }
 
     public void move() {
-        //eat
+        //eat food
         if(collision(snakeHead, food)){
             snakeBody.add(new Tile(food.x, food.y));
             placeFood();
@@ -139,10 +147,15 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener { /
             }
         }
 
-        if(snakeHead.x * tileSize < 0 || snakeHead.x * tileSize > boardWidth || 
-        snakeHead.y * tileSize < 0 || snakeHead.y * tileSize > boardHeight){
-        gameOver = true;
+        //collision with walls
+        if(snakeHead.x < 0 || snakeHead.x >= boardWidth/tileSize || 
+           snakeHead.y < 0 || snakeHead.y >= boardHeight/tileSize){
+            gameOver = true;
+        }
     }
+
+    public boolean collision(Tile tile1, Tile tile2){
+        return tile1.x == tile2.x && tile1.y == tile2.y;
     }
 
     @Override
